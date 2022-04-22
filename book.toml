@@ -1,0 +1,6 @@
+[book]
+authors = ["aizixun"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Mohe Note"
