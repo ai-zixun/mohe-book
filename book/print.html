@@ -3,7 +3,8 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Chapter 1 - Mohe Note</title>
+        <title>Mohe Note</title>
+        <meta name="robots" content="noindex" />
 
 
         <!-- Custom HTML head -->
@@ -81,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> Chapter 1</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="leetcode/leetcode.html"><strong aria-hidden="true">1.</strong> LeetCode</a></li><li class="chapter-item expanded "><a href="system_design/system_design.html"><strong aria-hidden="true">2.</strong> System Design</a></li><li class="chapter-item expanded "><a href="blog/blog.html"><strong aria-hidden="true">3.</strong> Blog</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,7 +143,90 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-1"><a class="header" href="#chapter-1">Chapter 1</a></h1>
+                        <div style="break-before: page; page-break-before: always;"></div><h1 id="system-design"><a class="header" href="#system-design">System Design</a></h1>
+<p>System Design Interview</p>
+<ul>
+<li>simulate in-team design process</li>
+<li>solve an ambiguous problem</li>
+<li>work with teammates/co-workers</li>
+<li>two co-workers working together</li>
+</ul>
+<p>Want:</p>
+<ul>
+<li>ability to collaborate with teammates</li>
+<li>work under pressure</li>
+<li>work with ambiguous problem</li>
+<li>constructive problem solving skills</li>
+</ul>
+<p>Not Want:</p>
+<ul>
+<li>over-engineering solution</li>
+<li>stubbornness</li>
+<li>do not answer without thinking, or without understanding the question's scope, requirements, backgrounds, etc.</li>
+</ul>
+<p>Approaches</p>
+<ol>
+<li>Comprehend the requirement</li>
+<li>Propose high-level designs</li>
+<li>Detailed designs</li>
+<li>Discussions</li>
+</ol>
+<p>Stage 1: Comprehend the requirement</p>
+<ul>
+<li>what does the customer/end-user wants?
+<ul>
+<li>what product feature is the customer looking for?</li>
+<li>what problem is the customer trying to solve?</li>
+</ul>
+</li>
+<li>what is the scale of the system?
+<ul>
+<li>how many users?</li>
+<li>what is the avg/p100 qps</li>
+<li>when does the customer need to scale 10x/100x</li>
+</ul>
+</li>
+<li>understand the technology the team is using
+<ul>
+<li>AWS? GCP? Azure?</li>
+<li>Java? Rust? Python?</li>
+<li>GraphQL? gRPC? REST?</li>
+</ul>
+</li>
+</ul>
+<p>Stage 2: Propose high-level designs</p>
+<ul>
+<li>propose design for different scales
+<ul>
+<li>get the interviewers involved</li>
+</ul>
+</li>
+<li>make some estimation on the traffic/scale
+<ul>
+<li>dive deep only if the interviewer is asking for deeper analysis</li>
+</ul>
+</li>
+<li>design the api schema / database schema if it is suited to the question</li>
+</ul>
+<p>Stage 3: Detailed design</p>
+<p>Stage 4: Discussions</p>
+<ul>
+<li>limitation, bottlenecks, disaster recovery, dev-ops, etc.</li>
+</ul>
+<p>Dos</p>
+<ul>
+<li>ask for clarification, do not make assumptions without verify with the interviewer</li>
+<li>thinking aloud - communicate</li>
+<li>make multiple design proposals</li>
+<li>design the most critical parts first</li>
+<li>ask for hints when stuck</li>
+</ul>
+<p>Don'ts</p>
+<ul>
+<li>do not go into detailed design in the early stage</li>
+<li>do not thinking alone</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="blog"><a class="header" href="#blog">BLOG</a></h1>
 
                     </main>
 
@@ -161,6 +245,22 @@
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
@@ -179,6 +279,11 @@
 
         <!-- Custom JS scripts -->
 
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
 
     </body>
 </html>
