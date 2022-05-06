@@ -2,6 +2,7 @@
 
 - [LeetCode](./leetcode/leetcode.md)
   - [LinkedList](./leetcode/linkedlist.md)
+  - [Binary Search](./leetcode/binary_search.md)
 - [System Design](./system_design/system_design.md)
 - [Blog](./blog/blog.md)
   - [2022 New Year Resolution](./blog/random-thoughts-on-tech/000-2022-New-Years-Resolution.md)
