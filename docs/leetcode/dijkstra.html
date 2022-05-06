@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>LinkedList - 靺鞨笔记</title>
+        <title>Dijkstra - 靺鞨笔记</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../leetcode/leetcode.html"><strong aria-hidden="true">1.</strong> LeetCode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../leetcode/linkedlist.html" class="active"><strong aria-hidden="true">1.1.</strong> LinkedList</a></li><li class="chapter-item expanded "><a href="../leetcode/binary_search.html"><strong aria-hidden="true">1.2.</strong> Binary Search</a></li><li class="chapter-item expanded "><a href="../leetcode/dijkstra.html"><strong aria-hidden="true">1.3.</strong> Dijkstra</a></li></ol></li><li class="chapter-item expanded "><a href="../system_design/system_design.html"><strong aria-hidden="true">2.</strong> System Design</a></li><li class="chapter-item expanded "><a href="../blog/blog.html"><strong aria-hidden="true">3.</strong> Blog</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../blog/random-thoughts-on-tech/000-2022-New-Years-Resolution.html"><strong aria-hidden="true">3.1.</strong> 2022 New Year Resolution</a></li><li class="chapter-item expanded "><a href="../blog/random-thoughts-on-tech/001-互联网时代的终结.html"><strong aria-hidden="true">3.2.</strong> 互联网时代的终结 </a></li><li class="chapter-item expanded "><a href="../blog/random-thoughts-on-tech/002-把复杂留给自己，把简单留给客户.html"><strong aria-hidden="true">3.3.</strong> 002</a></li><li class="chapter-item expanded "><a href="../blog/random-thoughts-on-tech/003-Serverless 新的云服务边疆.html"><strong aria-hidden="true">3.4.</strong> 003</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../leetcode/leetcode.html"><strong aria-hidden="true">1.</strong> LeetCode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../leetcode/linkedlist.html"><strong aria-hidden="true">1.1.</strong> LinkedList</a></li><li class="chapter-item expanded "><a href="../leetcode/binary_search.html"><strong aria-hidden="true">1.2.</strong> Binary Search</a></li><li class="chapter-item expanded "><a href="../leetcode/dijkstra.html" class="active"><strong aria-hidden="true">1.3.</strong> Dijkstra</a></li></ol></li><li class="chapter-item expanded "><a href="../system_design/system_design.html"><strong aria-hidden="true">2.</strong> System Design</a></li><li class="chapter-item expanded "><a href="../blog/blog.html"><strong aria-hidden="true">3.</strong> Blog</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../blog/random-thoughts-on-tech/000-2022-New-Years-Resolution.html"><strong aria-hidden="true">3.1.</strong> 2022 New Year Resolution</a></li><li class="chapter-item expanded "><a href="../blog/random-thoughts-on-tech/001-互联网时代的终结.html"><strong aria-hidden="true">3.2.</strong> 互联网时代的终结 </a></li><li class="chapter-item expanded "><a href="../blog/random-thoughts-on-tech/002-把复杂留给自己，把简单留给客户.html"><strong aria-hidden="true">3.3.</strong> 002</a></li><li class="chapter-item expanded "><a href="../blog/random-thoughts-on-tech/003-Serverless 新的云服务边疆.html"><strong aria-hidden="true">3.4.</strong> 003</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,173 +142,229 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="linkedlist"><a class="header" href="#linkedlist">LinkedList</a></h1>
-<p>Let's first take a look at how LeetCode define the LinkedList in rust</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#[derive(PartialEq, Eq, Clone, Debug)]
-pub struct ListNode {
-    pub val: i32,
-    pub next: Option&lt;Box&lt;ListNode&gt;&gt;,
-}
-<span class="boring">}
-</span></code></pre></pre>
-<p>As LeetCode is using <code>Box</code> as the pointer to point to the next node. It does not allow multiple reference to the same node and does not allow interior mutability. Hence, to make our life easier, we would like to change the <code>ListNode</code> definition to:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#[derive(PartialEq, Eq, Clone, Debug)]
-pub struct MutListNode {
-    pub val: i32,
-    pub next: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;,
-}
-<span class="boring">}
-</span></code></pre></pre>
-<ul>
-<li>With <code>Rc&lt;T&gt;</code>, we allow multiple ownership to the same <code>MutListNode</code></li>
-<li>With <code>RefCell&lt;T&gt;</code>, we allow interior mutability for the heap allocated <code>MutListNode</code></li>
-</ul>
-<p>To convert between the LeetCode official <code>ListNode</code> and the mutable multi-referencing <code>MutListNode</code> we would need the following conversion utility functions</p>
-<p>From <code>Option&lt;Box&lt;ListNode&gt;&gt;</code> to <code>Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;</code></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn to_mut_list_node(node: Option&lt;Box&lt;ListNode&gt;&gt;) -&gt; Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt; {
-    match node {
-        None =&gt; None,
-        Some(node) =&gt; Some(Rc::new(RefCell::new(MutListNode {
-            val: node.val,
-            next: to_mut_list_node(node.next),
-        }))),
-    }
-}
-<span class="boring">}
-</span></code></pre></pre>
-<p>From <code>Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;</code> to <code>Option&lt;Box&lt;ListNode&gt;&gt;</code></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn to_list_node(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
-    match node {
-        None =&gt; None,
-        Some(node) =&gt; Some(Box::new(ListNode {
-            val: node.borrow().val,
-            next: to_list_node(node.borrow().next.clone()),
-        })),
-    }
-}
-<span class="boring">}
-</span></code></pre></pre>
-<h2 id="source-code"><a class="header" href="#source-code">Source Code</a></h2>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#[derive(PartialEq, Eq, Clone, Debug)]
-pub struct ListNode {
-    pub val: i32,
-    pub next: Option&lt;Box&lt;ListNode&gt;&gt;,
+                        <h2 id="dijkstra-f64"><a class="header" href="#dijkstra-f64">Dijkstra f64</a></h2>
+<pre><pre class="playground"><code class="language-rust">use std::cmp::Ordering;
+use std::collections::BinaryHeap;
+
+#[derive(PartialEq, PartialOrd)]
+struct Node {
+    node: usize,
+    prob: f64,
 }
 
-impl ListNode {
-    #[inline]
-    fn new(val: i32) -&gt; Self {
-        ListNode { next: None, val }
+impl Eq for Node {}
+
+impl Ord for Node {
+    fn cmp(&amp;self, other: &amp;Self) -&gt; Ordering {
+        // Max-heap
+        self.prob
+            .partial_cmp(&amp;other.prob)
+            .unwrap()
+            .then_with(|| self.node.cmp(&amp;other.node))
     }
 }
 
-#[derive(PartialEq, Eq, Clone, Debug)]
-pub struct MutListNode {
-    pub val: i32,
-    pub next: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;,
-}
+struct Solution {}
 
-impl MutListNode {
-    #[inline]
-    fn new(val: i32) -&gt; Self {
-        MutListNode { next: None, val }
+impl Solution {
+    pub fn max_probability(
+        n: i32,
+        edges: Vec&lt;Vec&lt;i32&gt;&gt;,
+        succ_prob: Vec&lt;f64&gt;,
+        start: i32,
+        end: i32,
+    ) -&gt; f64 {
+        let n = n as usize;
+        let start = start as usize;
+        let end = end as usize;
+        let graph = Self::convert_edge_list_to_adjacency_list(edges, succ_prob, n);
+
+        // Dijkstra
+        // Edges: E
+        // Nodes/Vertices: V
+        //
+        // Time Complexity: O(E + V log V )
+        // Space Complexity: O(V)
+        let mut cost = vec![0.0; n];
+        cost[start] = 1.0;
+
+        let mut pq: BinaryHeap&lt;Node&gt; = BinaryHeap::new();
+        pq.push(Node {
+            node: start,
+            prob: 1.0,
+        });
+
+        while let Some(node) = pq.pop() {
+            for (next, edge_prob) in &amp;graph[node.node] {
+                let prob = *edge_prob * node.prob;
+                if prob &gt; cost[*next] {
+                    cost[*next] = prob;
+                    pq.push(Node { node: *next, prob })
+                }
+            }
+        }
+
+        cost[end]
+    }
+
+    /// Edges: E
+    /// Nodes/Vertices: V
+    ///
+    /// Time Complexity: O(E)
+    /// Space Complexity: O(V + E)
+    fn convert_edge_list_to_adjacency_list(
+        edges: Vec&lt;Vec&lt;i32&gt;&gt;,
+        succ_prob: Vec&lt;f64&gt;,
+        n: usize,
+    ) -&gt; Vec&lt;Vec&lt;(usize, f64)&gt;&gt; {
+        let mut graph: Vec&lt;Vec&lt;(usize, f64)&gt;&gt; = vec![vec![]; n];
+        for i in 0..edges.len() {
+            let u = edges[i][0] as usize;
+            let v = edges[i][1] as usize;
+            let prob = succ_prob[i];
+            graph[u].push((v, prob));
+            graph[v].push((u, prob));
+        }
+        graph
     }
 }
 
-fn to_mut_list_node(node: Option&lt;Box&lt;ListNode&gt;&gt;) -&gt; Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt; {
-    match node {
-        None =&gt; None,
-        Some(node) =&gt; Some(Rc::new(RefCell::new(MutListNode {
-            val: node.val,
-            next: to_mut_list_node(node.next),
-        }))),
+fn main() {
+    let n = 3;
+    let edges = [[0, 1], [1, 2], [0, 2]];
+    let edges: Vec&lt;Vec&lt;i32&gt;&gt; = edges.into_iter().map(|e| e.to_vec()).collect();
+    let succ_prob = [0.5, 0.5, 0.2];
+    let succ_prob: Vec&lt;f64&gt; = succ_prob.into_iter().collect();
+    let start = 0;
+    let end = 2;
+    let res = Solution::max_probability(n, edges, succ_prob, start, end);
+    println!(&quot;{:?}&quot;, res);
+}
+
+</code></pre></pre>
+<h2 id="dijkstra-i64"><a class="header" href="#dijkstra-i64">Dijkstra i64</a></h2>
+<pre><pre class="playground"><code class="language-rust">use std::{cmp::Ordering, collections::BinaryHeap};
+
+#[derive(Eq, PartialEq)]
+struct Node {
+    index: usize,
+    cost: i64,
+}
+
+impl Ord for Node {
+    fn cmp(&amp;self, other: &amp;Self) -&gt; Ordering {
+        // min-heap
+        other
+            .cost
+            .cmp(&amp;self.cost)
+            .then_with(|| self.index.cmp(&amp;other.index))
     }
 }
 
-fn to_list_node(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
-    match node {
-        None =&gt; None,
-        Some(node) =&gt; Some(Box::new(ListNode {
-            val: node.borrow().val,
-            next: to_list_node(node.borrow().next.clone()),
-        })),
+impl PartialOrd for Node {
+    fn partial_cmp(&amp;self, other: &amp;Self) -&gt; Option&lt;Ordering&gt; {
+        Some(self.cmp(other))
     }
 }
 
-fn vec_to_linked_list(vec: Vec&lt;i32&gt;) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
-    let mut root = ListNode::new(0);
-    let mut curr = &amp;mut root;
-    for n in vec {
-        curr.next = Some(Box::new(ListNode::new(n)));
-        curr = curr.next.as_mut().unwrap();
+struct Solution {}
+
+impl Solution {
+    const MODULO: i64 = 10_0000_0007;
+
+    /// Edges: E
+    /// Nodes/Vertices: V
+    ///
+    /// Time Complexity: O(E)
+    /// Space Complexity: O(V + E)
+    fn convert_edge_list_to_adjacency_list(
+        edges: Vec&lt;Vec&lt;i32&gt;&gt;,
+        n: usize,
+    ) -&gt; Vec&lt;Vec&lt;(usize, i64)&gt;&gt; {
+        let mut graph: Vec&lt;Vec&lt;(usize, i64)&gt;&gt; = vec![vec![]; n];
+        for edge in edges {
+            let src = edge[0] as usize;
+            let dst = edge[1] as usize;
+            let cost = edge[2] as i64;
+            graph[src].push((dst, cost));
+            graph[dst].push((src, cost));
+        }
+        graph
     }
 
-    root.next
-}
+    pub fn count_paths(n: i32, roads: Vec&lt;Vec&lt;i32&gt;&gt;) -&gt; i32 {
+        let n = n as usize;
+        let graph: Vec&lt;Vec&lt;(usize, i64)&gt;&gt; = Self::convert_edge_list_to_adjacency_list(roads, n);
+        let mut cost: Vec&lt;i64&gt; = vec![i64::MAX; n];
+        let mut path_count: Vec&lt;i64&gt; = vec![0; n];
 
-fn linked_list_to_vec(node: Option&lt;Box&lt;ListNode&gt;&gt;) -&gt; Vec&lt;i32&gt; {
-    let mut vec = vec![];
+        // Dijkstra
+        // Edges: E
+        // Nodes/Vertices: V
+        //
+        // Time Complexity: O(E + V log V )
+        // Space Complexity: O(V)
+        let mut pq: BinaryHeap&lt;Node&gt; = BinaryHeap::new();
+        path_count[0] = 1;
+        cost[0] = 0;
+        pq.push(Node { index: 0, cost: 0 });
 
-    let mut curr = node;
-    while curr != None {
-        vec.push(curr.as_ref().unwrap().val);
-        curr = curr.unwrap().next;
+        while let Some(node) = pq.pop() {
+            for (next_index, next_cost) in &amp;graph[node.index] {
+                if node.cost + *next_cost &gt; cost[*next_index] {
+                    continue;
+                } else if cost[*next_index] == node.cost + *next_cost {
+                    path_count[*next_index] =
+                        (path_count[*next_index] + path_count[node.index]) % Self::MODULO;
+                } else {
+                    cost[*next_index] = node.cost + *next_cost;
+                    path_count[*next_index] = path_count[node.index];
+                    pq.push(Node {
+                        index: *next_index,
+                        cost: node.cost + *next_cost,
+                    });
+                }
+            }
+
+            // println!(&quot;{:?} {:?} {:?}&quot;, node.index, node.cost, node.path);
+            // println!(&quot;{:?}&quot;, cost);
+            // println!(&quot;{:?}&quot;, path_count);
+        }
+
+        path_count[n - 1] as i32
     }
-
-    vec
 }
 
-fn vec_to_mut_linked_list(vec: Vec&lt;i32&gt;) -&gt; Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt; {
-    let root = Rc::new(RefCell::new(MutListNode::new(0)));
-    let mut curr = root.clone();
-    for n in vec {
-        curr.borrow_mut().next = Some(Rc::new(RefCell::new(MutListNode::new(n))));
-        let next = curr.borrow().next.clone().unwrap();
-        curr = next;
-    }
-
-    let node = root.borrow().next.clone();
-    node
+fn main() {
+    let n = 7;
+    let roads = [
+        [0, 6, 7],
+        [0, 1, 2],
+        [1, 2, 3],
+        [1, 3, 3],
+        [6, 3, 3],
+        [3, 5, 1],
+        [6, 5, 1],
+        [2, 5, 1],
+        [0, 4, 5],
+        [4, 6, 2],
+    ];
+    let roads = roads.into_iter().map(|r| r.to_vec()).collect();
+    let res = Solution::count_paths(n, roads);
+    println!(&quot;{:?}&quot;, res);
 }
 
-fn mut_linked_list_to_vec(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;) -&gt; Vec&lt;i32&gt; {
-    let mut res = vec![];
-
-    let mut curr = node;
-    while let Some(curr_node) = curr {
-        res.push(curr_node.borrow().val);
-        curr = curr_node.borrow().next.clone();
-    }
-
-    res
-}
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../leetcode/leetcode.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../leetcode/binary_search.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../leetcode/binary_search.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../system_design/system_design.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -318,11 +374,11 @@ fn mut_linked_list_to_vec(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&g
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../leetcode/leetcode.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../leetcode/binary_search.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../leetcode/binary_search.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../system_design/system_design.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
