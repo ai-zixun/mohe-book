@@ -1,13 +1,27 @@
-# Scaling Push Messaging for Millions of Devices @Netflix
+# Netflix Zuul Push
 
-youtube.com/watch?v=6w6E_B55p0E
+## Zuul Push Architecture
+
+Zuul Push is the push engine at Netflix
+
+![Zuul architecture](./images/netflix_zuul_000.png)
+
+### Workflow
+1. **Client** establishes an persistent websocket/SSE connection to the **Zuul Push Service**. The **Client** will keep the connection alive until the session is terminated.
+2. **Zuul Push Service** register the user and connection information to the **Push Registry** database.
+3. **Service** that need to send a push message (source of push message) use the **Push Library** (SDK) to send the message to the **Push Message Queue**.
+4. **Message Processor**
+   1. pulls/retrieves an message from the **Push Message Queue**
+   2. lookups the **Push Registry** to check which **Zuul Push Service** host is connected to the client
+   3. delivers the message to the **Zuul Push Service** host
+5. **Zuul Push Service** host send the message to the **Client**
 
 ## Background
 
 Netflix use a recommendation engine to generate suggested videos for each user. i.e. the home page of the Netflix website for each user is different.
 
 
-## Push vs Pull
+**Push vs Pull**
 
 * Pull
   * If too frequent - Overload the system
@@ -15,7 +29,7 @@ Netflix use a recommendation engine to generate suggested videos for each user. 
 * Push
   * Most suited for Netflix
 
-## Push
+**Push**
 
 Define Push:
 * **P**ersist
@@ -23,20 +37,7 @@ Define Push:
 * **S**omething
 * **H**appens
 
-## Zuul Push Architecture
 
-Zuul Push is the push engine at Netflix
-
-
-* Zuul push service <-- websocket/SSE --- cliet (TV, PC, Phones)
-  * Persist connection
-  * The client keep the connection until the session is terminated
-* Zuul push service --- Register Users --> Push Registry (Database)
-* Source of push message ---> Push Library
-* Push Library ---> Push Message Queue ---> Message Processor
-* Message Processor ---> Retrieve which server the client is using ---> Push registry
-* Message Processor ---> deliver message ---> Zuul push servers
-* Zuul push servers ---> send ---> client
 
 ### Zuul push servers
 
@@ -167,3 +168,7 @@ AWS ALB not support WebSocket
   * Send special diagnostics to devises
 * Remote recovery
 * User messaging
+
+
+## References
+* Susheel Aroskar- [*Scaling Push Messaging for Millions of Devices @Netflix*](https://www.youtube.com/watch?v=6w6E_B55p0E)

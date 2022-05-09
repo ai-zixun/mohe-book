@@ -7,6 +7,7 @@
   - [Math](./leetcode/math.md)
   - [Segment Tree](./leetcode/segment_tree.md)
 - [System Design](./system_design/system_design.md)
+  - [Netflix Zuul](./system_design/examples/netflix_zuul.md)
 - [Blog](./blog/blog.md)
   - [2022 New Year Resolution](./blog/random-thoughts-on-tech/000-2022-New-Years-Resolution.md)
   - [互联网时代的终结 ](blog/random-thoughts-on-tech/001-互联网时代的终结.md)
