@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="leetcode/leetcode.html"><strong aria-hidden="true">1.</strong> LeetCode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="leetcode/linkedlist.html"><strong aria-hidden="true">1.1.</strong> LinkedList</a></li><li class="chapter-item expanded "><a href="leetcode/binary_search.html"><strong aria-hidden="true">1.2.</strong> Binary Search</a></li><li class="chapter-item expanded "><a href="leetcode/dijkstra.html"><strong aria-hidden="true">1.3.</strong> Dijkstra</a></li><li class="chapter-item expanded "><a href="leetcode/math.html"><strong aria-hidden="true">1.4.</strong> Math</a></li><li class="chapter-item expanded "><a href="leetcode/segment_tree.html"><strong aria-hidden="true">1.5.</strong> Segment Tree</a></li></ol></li><li class="chapter-item expanded "><a href="system_design/system_design.html"><strong aria-hidden="true">2.</strong> System Design</a></li><li class="chapter-item expanded "><a href="blog/blog.html"><strong aria-hidden="true">3.</strong> Blog</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/000-2022-New-Years-Resolution.html"><strong aria-hidden="true">3.1.</strong> 2022 New Year Resolution</a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/001-互联网时代的终结.html"><strong aria-hidden="true">3.2.</strong> 互联网时代的终结 </a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/002-把复杂留给自己，把简单留给客户.html"><strong aria-hidden="true">3.3.</strong> 002</a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/003-Serverless 新的云服务边疆.html"><strong aria-hidden="true">3.4.</strong> 003</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="leetcode/leetcode.html"><strong aria-hidden="true">1.</strong> LeetCode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="leetcode/linkedlist.html"><strong aria-hidden="true">1.1.</strong> LinkedList</a></li><li class="chapter-item expanded "><a href="leetcode/binary_search.html"><strong aria-hidden="true">1.2.</strong> Binary Search</a></li><li class="chapter-item expanded "><a href="leetcode/dijkstra.html"><strong aria-hidden="true">1.3.</strong> Dijkstra</a></li><li class="chapter-item expanded "><a href="leetcode/math.html"><strong aria-hidden="true">1.4.</strong> Math</a></li><li class="chapter-item expanded "><a href="leetcode/segment_tree.html"><strong aria-hidden="true">1.5.</strong> Segment Tree</a></li></ol></li><li class="chapter-item expanded "><a href="system_design/system_design.html"><strong aria-hidden="true">2.</strong> System Design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="system_design/examples/netflix_zuul.html"><strong aria-hidden="true">2.1.</strong> Netflix Zuul</a></li></ol></li><li class="chapter-item expanded "><a href="blog/blog.html"><strong aria-hidden="true">3.</strong> Blog</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/000-2022-New-Years-Resolution.html"><strong aria-hidden="true">3.1.</strong> 2022 New Year Resolution</a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/001-互联网时代的终结.html"><strong aria-hidden="true">3.2.</strong> 互联网时代的终结 </a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/002-把复杂留给自己，把简单留给客户.html"><strong aria-hidden="true">3.3.</strong> 002</a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/003-Serverless 新的云服务边疆.html"><strong aria-hidden="true">3.4.</strong> 003</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1111,6 +1111,176 @@ impl SegmentTreeNode{
 <h2 id="references"><a class="header" href="#references">References</a></h2>
 <ul>
 <li>Alex Xu - <em>System Design Interview - An Insider's Guide</em></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="netflix-zuul-push"><a class="header" href="#netflix-zuul-push">Netflix Zuul Push</a></h1>
+<h2 id="zuul-push-architecture"><a class="header" href="#zuul-push-architecture">Zuul Push Architecture</a></h2>
+<p>Zuul Push is the push engine at Netflix</p>
+<p><img src="system_design/examples/./images/netflix_zuul_000.png" alt="Zuul architecture" /></p>
+<h3 id="workflow"><a class="header" href="#workflow">Workflow</a></h3>
+<ol>
+<li><strong>Client</strong> establishes an persistent websocket/SSE connection to the <strong>Zuul Push Service</strong>. The <strong>Client</strong> will keep the connection alive until the session is terminated.</li>
+<li><strong>Zuul Push Service</strong> register the user and connection information to the <strong>Push Registry</strong> database.</li>
+<li><strong>Service</strong> that need to send a push message (source of push message) use the <strong>Push Library</strong> (SDK) to send the message to the <strong>Push Message Queue</strong>.</li>
+<li><strong>Message Processor</strong>
+<ol>
+<li>pulls/retrieves an message from the <strong>Push Message Queue</strong></li>
+<li>lookups the <strong>Push Registry</strong> to check which <strong>Zuul Push Service</strong> host is connected to the client</li>
+<li>delivers the message to the <strong>Zuul Push Service</strong> host</li>
+</ol>
+</li>
+<li><strong>Zuul Push Service</strong> host send the message to the <strong>Client</strong></li>
+</ol>
+<h2 id="background"><a class="header" href="#background">Background</a></h2>
+<p>Netflix use a recommendation engine to generate suggested videos for each user. i.e. the home page of the Netflix website for each user is different.</p>
+<p><strong>Push vs Pull</strong></p>
+<ul>
+<li>Pull
+<ul>
+<li>If too frequent - Overload the system</li>
+<li>If too infrequent - Data not fresh enough</li>
+</ul>
+</li>
+<li>Push
+<ul>
+<li>Most suited for Netflix</li>
+</ul>
+</li>
+</ul>
+<p><strong>Push</strong></p>
+<p>Define Push:</p>
+<ul>
+<li><strong>P</strong>ersist</li>
+<li><strong>U</strong>ntil</li>
+<li><strong>S</strong>omething</li>
+<li><strong>H</strong>appens</li>
+</ul>
+<h3 id="zuul-push-servers"><a class="header" href="#zuul-push-servers">Zuul push servers</a></h3>
+<p>Handling millions of persistent connections</p>
+<p>Using Non-blocking async-io</p>
+<p>C10K challengingL</p>
+<ul>
+<li>Supporting 10K concurrent connection on a single server</li>
+</ul>
+<p><strong>Traditional method:</strong></p>
+<ul>
+<li>1 Connection per Socket</li>
+<li>1 Socket per thread</li>
+</ul>
+<p>Socket --&gt; Read --&gt; Write --&gt; Thread 1
+Socket --&gt; Write --&gt; Read --&gt; Thread 2</p>
+<p><strong>Async I/O</strong></p>
+<p>Socket --&gt; write callback --&gt; single thread --&gt; read callback --&gt; Socket</p>
+<p>Netflix use <strong>Netty</strong> for the Async I/O</p>
+<h3 id="push-registry"><a class="header" href="#push-registry">Push Registry</a></h3>
+<p>Push registry feature checklist (the database used as the push registry should have the following feature):</p>
+<ul>
+<li>Low read latency</li>
+<li>Record expiry (e.g. TTL)</li>
+<li>Sharding</li>
+<li>Replication</li>
+</ul>
+<p>TTL -&gt; If the client failed to terminated the connection proactively; the system need to use TTL to remove the registered entry from the Push registry.</p>
+<p>Good choice for Push Registry</p>
+<ul>
+<li>Redis</li>
+<li>Cassandra</li>
+<li>AWS DynamoDB</li>
+</ul>
+<p>Netflix use <strong>Dynomite</strong></p>
+<p>Dynomite =
++ Redis
++ Auto-sharding
++ Read/Write quorum
++ Cross-region replication</p>
+<h3 id="message-processing"><a class="header" href="#message-processing">Message Processing</a></h3>
+<p>Message queuing + route delivery</p>
+<p>Netflix use <strong>Kafka</strong></p>
+<p>Message sender use &quot;FIRE and FORGET&quot; approach:</p>
+<ul>
+<li>Drop the push message into the queue</li>
+<li>Carry on with other tasks</li>
+</ul>
+<p>Cross-Region Replication</p>
+<ul>
+<li>Netflix use 3 AWS region</li>
+<li>Use AWS Kafka queue replication</li>
+</ul>
+<p>Queue:</p>
+<ul>
+<li>Hard to use single queue</li>
+<li>Different queues for different priorities</li>
+</ul>
+<p>Message processor</p>
+<ul>
+<li>multiple message process in parallel</li>
+<li>auto scale based on the number of message in the queue</li>
+</ul>
+<h3 id="operating-zuul-push"><a class="header" href="#operating-zuul-push">Operating Zuul Push</a></h3>
+<p>Different from the Stateless services</p>
+<p>Stateful:</p>
+<ul>
+<li>Persistent connections - long lived statble connection
+<ul>
+<li>Great for client efficiency</li>
+<li>Terrible for quick deploy/rollback</li>
+</ul>
+</li>
+</ul>
+<p>Deploy/Rollback</p>
+<ul>
+<li>Client are not automatically migrate to the newly deployed servers</li>
+<li><strong>Thundering herd</strong>: If keep the connection at once, the client would try to connect to the new servers at once (overwhelm the servers)</li>
+</ul>
+<p>Solution:</p>
+<ul>
+<li>tear down connection periodically (from the server side)</li>
+<li>randomize each connection's lifetime (jitter)</li>
+<li>result: randomizing connection lifetime on reconnect peak</li>
+<li>Extra: server ask client to close its connection (the party terminate the TCP connection might have a FD on linux remain open for up to 2 mins)</li>
+</ul>
+<h3 id="optimization"><a class="header" href="#optimization">Optimization</a></h3>
+<h4 id="how-to-optimize-push-server-most-connection-are-idle"><a class="header" href="#how-to-optimize-push-server-most-connection-are-idle">How to optimize push server? (most connection are idle)?</a></h4>
+<p>first approach: big ec2</p>
+<ul>
+<li>big EC2, as many connection on the single server as possible</li>
+<li>Issue: if a server is down: <strong>Thundering herd</strong> happends</li>
+</ul>
+<p>second approach: goldilocks strategy (just right)</p>
+<ul>
+<li>m4.large (2v CPU)</li>
+<li>84,000 concurrent connection per ec2</li>
+</ul>
+<p>Optimize for cost, NOT for instance count</p>
+<h4 id="how-to-auto-scale-"><a class="header" href="#how-to-auto-scale-">How to auto-scale ?</a></h4>
+<p>RPS (request per second) ? NO</p>
+<ul>
+<li>No RPS for push servers</li>
+</ul>
+<p>CPU ? NO</p>
+<ul>
+<li>Instances is not limited by CPU</li>
+</ul>
+<p>Open Connection ? YES</p>
+<ul>
+<li>Only factor that is important to a push server</li>
+</ul>
+<h4 id="aws-elastic-load-balancer-cannot-proxy-websocket"><a class="header" href="#aws-elastic-load-balancer-cannot-proxy-websocket">AWS Elastic Load Balancer cannot proxy WebSocket</a></h4>
+<p>ELB does not understand websocket  Upgrade request (A special HTTP request)</p>
+<p>Solution: Run ELB as a TCP load balancer (NLB) (Layer 4)</p>
+<p>AWS ALB not support WebSocket</p>
+<h2 id="use-case-for-push-system"><a class="header" href="#use-case-for-push-system">Use case for Push System</a></h2>
+<ul>
+<li>On-demand diagnostics
+<ul>
+<li>Send special diagnostics to devises</li>
+</ul>
+</li>
+<li>Remote recovery</li>
+<li>User messaging</li>
+</ul>
+<h2 id="references-1"><a class="header" href="#references-1">References</a></h2>
+<ul>
+<li>Susheel Aroskar- <a href="https://www.youtube.com/watch?v=6w6E_B55p0E"><em>Scaling Push Messaging for Millions of Devices @Netflix</em></a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="blog"><a class="header" href="#blog">BLOG</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="2022-new-years-resolution"><a class="header" href="#2022-new-years-resolution">2022 New Year's Resolution</a></h1>
