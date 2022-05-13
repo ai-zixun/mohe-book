@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="leetcode/leetcode.html"><strong aria-hidden="true">1.</strong> LeetCode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="leetcode/linkedlist.html"><strong aria-hidden="true">1.1.</strong> LinkedList</a></li><li class="chapter-item expanded "><a href="leetcode/binary_search.html"><strong aria-hidden="true">1.2.</strong> Binary Search</a></li><li class="chapter-item expanded "><a href="leetcode/dijkstra.html"><strong aria-hidden="true">1.3.</strong> Dijkstra</a></li><li class="chapter-item expanded "><a href="leetcode/math.html"><strong aria-hidden="true">1.4.</strong> Math</a></li><li class="chapter-item expanded "><a href="leetcode/segment_tree.html"><strong aria-hidden="true">1.5.</strong> Segment Tree</a></li></ol></li><li class="chapter-item expanded "><a href="system_design/system_design.html"><strong aria-hidden="true">2.</strong> System Design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="system_design/examples/netflix_zuul.html"><strong aria-hidden="true">2.1.</strong> Netflix Zuul</a></li></ol></li><li class="chapter-item expanded "><a href="blog/blog.html"><strong aria-hidden="true">3.</strong> Blog</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/000-2022-New-Years-Resolution.html"><strong aria-hidden="true">3.1.</strong> 2022 New Year Resolution</a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/001-互联网时代的终结.html"><strong aria-hidden="true">3.2.</strong> 互联网时代的终结 </a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/002-把复杂留给自己，把简单留给客户.html"><strong aria-hidden="true">3.3.</strong> 002</a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/003-Serverless 新的云服务边疆.html"><strong aria-hidden="true">3.4.</strong> 003</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="leetcode/leetcode.html"><strong aria-hidden="true">1.</strong> LeetCode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="leetcode/linkedlist.html"><strong aria-hidden="true">1.1.</strong> LinkedList</a></li><li class="chapter-item expanded "><a href="leetcode/binary_search.html"><strong aria-hidden="true">1.2.</strong> Binary Search</a></li><li class="chapter-item expanded "><a href="leetcode/dijkstra.html"><strong aria-hidden="true">1.3.</strong> Dijkstra</a></li><li class="chapter-item expanded "><a href="leetcode/math.html"><strong aria-hidden="true">1.4.</strong> Math</a></li><li class="chapter-item expanded "><a href="leetcode/segment_tree.html"><strong aria-hidden="true">1.5.</strong> Segment Tree</a></li><li class="chapter-item expanded "><a href="leetcode/rust_btreemap.html"><strong aria-hidden="true">1.6.</strong> Rust - BTreeMap</a></li></ol></li><li class="chapter-item expanded "><a href="system_design/system_design.html"><strong aria-hidden="true">2.</strong> System Design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="system_design/examples/netflix_zuul.html"><strong aria-hidden="true">2.1.</strong> Netflix Zuul</a></li></ol></li><li class="chapter-item expanded "><a href="blog/blog.html"><strong aria-hidden="true">3.</strong> Blog</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/000-2022-New-Years-Resolution.html"><strong aria-hidden="true">3.1.</strong> 2022 New Year Resolution</a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/001-互联网时代的终结.html"><strong aria-hidden="true">3.2.</strong> 互联网时代的终结 </a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/002-把复杂留给自己，把简单留给客户.html"><strong aria-hidden="true">3.3.</strong> 002</a></li><li class="chapter-item expanded "><a href="blog/random-thoughts-on-tech/003-Serverless 新的云服务边疆.html"><strong aria-hidden="true">3.4.</strong> 003</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1020,6 +1020,83 @@ impl SegmentTreeNode{
 }
 
 </code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rust-btreemap-and-btreeset"><a class="header" href="#rust-btreemap-and-btreeset">Rust BTreeMap and BTreeSet</a></h1>
+<p>In rust</p>
+<ul>
+<li>the <code>std::collections::BTreeMap</code> is the implementation of a sorted map.</li>
+<li>the <code>std::collections::BTreeSet</code> is the implementation of a sorted set.</li>
+</ul>
+<h2 id="floor-and-ceil"><a class="header" href="#floor-and-ceil">Floor and Ceil</a></h2>
+<h3 id="floor-the-entry-with-the-greatest-key-that-is-less-or-equal-to-a-given-key"><a class="header" href="#floor-the-entry-with-the-greatest-key-that-is-less-or-equal-to-a-given-key">Floor: The Entry with the Greatest Key that is Less or Equal to a Given Key</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>map.range(..=key).next_back().unwrap();
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="ceil-the-entry-with-the-least-key-that-is-greater-or-equal-to-a-given-key"><a class="header" href="#ceil-the-entry-with-the-least-key-that-is-greater-or-equal-to-a-given-key">Ceil: The Entry with the Least key that is Greater or Equal to a Given Key</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>map.range(key..).next().unwrap();
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="first"><a class="header" href="#first">First</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let set = BTreeSet::from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+// unstable approach: need `#![feature(map_first_last)]` feature flag
+println!(&quot;{:?}&quot;, set.first());
+// current approach:
+println!(&quot;{:?}&quot;, set.range(..).next());
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="last"><a class="header" href="#last">Last</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let set = BTreeSet::from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+// unstable approach: need `#![feature(map_first_last)]` feature flag
+println!(&quot;{:?}&quot;, set.last());
+// current approach:
+println!(&quot;{:?}&quot;, set.range(..).next_back());
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="how-does-it-work"><a class="header" href="#how-does-it-work">How does it work?</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub fn range&lt;T, R&gt;(&amp;self, range: R) -&gt; Range&lt;'_, K, V&gt;
+<span class="boring">}
+</span></code></pre></pre>
+<p>BTreeMap has an range method that takes a range as input and will output all the entries from the map with a key that is within the given range.</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">use std::collections::BTreeSet;
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span>let set = BTreeSet::from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+let res = set.range(..);
+println!(&quot;{:?}&quot;, res);
+
+// [5, 6, 7, 8, 9]
+let res = set.range(5..);
+println!(&quot;{:?}&quot;, res);
+
+// [0, 1, 2, 3, 4]
+let res = set.range(..5);
+println!(&quot;{:?}&quot;, res);
+
+// [0, 1, 2, 3, 4, 5]
+let res = set.range(..=5);
+println!(&quot;{:?}&quot;, res);
+
+// [4, 5, 6]
+let res = set.range(4..=6);
+println!(&quot;{:?}&quot;, res);
+<span class="boring">}
+</span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="system-design"><a class="header" href="#system-design">System Design</a></h1>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
 <p>After working in the software industry for over two years, I have learned a lot about what is hiring manager and interviewer looking for when hiring a new software development engineer. Nevertheless, to become an senior/staff engineer, there is still a long way to go. Since I departed from my first job at AWS, I have been trying to learn from lectures, books, and keynote presentations regarding the knowledge and skills that I need to tackle a system design interview. Here, is where I keep all my notes. It is not a guide, it is not a book, it is not even well-organized at all. However, it is where I keep the knowledge that I have learned so far.</p>

@@ -6,6 +6,7 @@
   - [Dijkstra](./leetcode/dijkstra.md)
   - [Math](./leetcode/math.md)
   - [Segment Tree](./leetcode/segment_tree.md)
+  - [Rust - BTreeMap](./leetcode/rust_btreemap.md)
 - [System Design](./system_design/system_design.md)
   - [Netflix Zuul](./system_design/examples/netflix_zuul.md)
 - [Blog](./blog/blog.md)
