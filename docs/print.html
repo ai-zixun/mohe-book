@@ -739,6 +739,41 @@ fn greatest_common_divisor(a: i32, b: i32) -&gt; i32 {
     a * b / greatest_common_divisor(a, b)
 }
 </code></pre></pre>
+<h2 id="fraction-comparison--slope-comparison"><a class="header" href="#fraction-comparison--slope-comparison">Fraction Comparison / Slope Comparison</a></h2>
+<p>When comparing <code>a/b</code> and <code>x/y</code> in computer science, we can use a floating point (<code>f64</code> in rust or <code>double</code> in java). Nevertheless, due to the limited precision of IEEE 754-1985 / IEEE 754-2008 floating point standard, directly checking <code>a / b == x / y</code> might not yield the correct result. Hence, we have two alternative approaches:</p>
+<ol>
+<li>
+<p><strong>Cross Product</strong></p>
+<p>Instead of checking <code>a / b == x / y</code>, we can check <code>a * y == x * b</code>.</p>
+</li>
+<li>
+<p><strong>GDC Slope</strong></p>
+<p>If <code>a / b</code> and <code>x / y</code> represent the same slope, then <code>a / gcd(a, b) == x / gcd(x, y)</code> and <code>b / gcd(a, b) == y / gcd(x, y)</code> must be true.</p>
+</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">fn gcd(a: i128, b: i128) -&gt; i128 {
+</span><span class="boring">    if b != 0 { gcd(b, a % b) } else { a }
+</span><span class="boring">}
+</span><span class="boring">let (a, b) = (1, 1);
+</span><span class="boring">let (x, y) = (999999999999999999, 1000000000000000000);
+</span><span class="boring">
+</span>println!(&quot;a: {}&quot;, a);
+println!(&quot;b: {}&quot;, b);
+println!(&quot;x: {}&quot;, x);
+println!(&quot;y: {}&quot;, y);
+
+let equal = a as f64 / b as f64 == x as f64 / y as f64;
+let equal_cross_product = a * y == x * b;
+let equal_gdc = a / gcd(a, b) == x / gcd(x, y) &amp;&amp; b / gcd(a, b) == y / gcd(x, y);
+
+println!(&quot;Standard approach:      {}&quot;, equal);
+println!(&quot;Cross product approach: {}&quot;, equal_cross_product);
+println!(&quot;GDC approach:           {}&quot;, equal_gdc);
+<span class="boring">}
+</span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="segment-tree-range-sum"><a class="header" href="#segment-tree-range-sum">Segment Tree Range Sum</a></h1>
 <pre><pre class="playground"><code class="language-rust">use std::{
     cmp::Ordering,
