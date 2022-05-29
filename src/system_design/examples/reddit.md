@@ -100,3 +100,36 @@ New:
 Auto Scale
 * Stateful vs Stateless
   * They need to be handled differently when dealing with autoscaling
+
+
+```
+@startuml
+
+agent Client
+agent CDN
+agent Frontend
+agent API
+agent r2
+agent Search
+agent Listing
+agent Thing
+agent Rec
+agent S3
+
+Client -- CDN
+CDN -- Frontend
+CDN -- r2
+CDN -- API
+CDN -- S3
+Frontend -- API
+Frontend -- r2
+r2 -- Search
+r2 -- Thing
+r2 -- Rec
+r2 -- Listing
+Listing -- Thing
+Listing -- Rec
+
+@enduml
+
+```
