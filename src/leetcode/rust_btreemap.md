@@ -35,6 +35,33 @@ println!("{:?}", set.last());
 println!("{:?}", set.range(..).next_back());
 ```
 
+### Remove all elements in a given range
+
+*NOTE: This might not be the most idiomatic rust approach*
+
+Instead of removing elements from the range one by one, we have to filter out of the element in the range and then re-create the tree-map.
+
+```rust
+use std::collections::BTreeMap;
+
+fn main() {
+    let mut map: BTreeMap<usize, usize> = BTreeMap::new();
+    map.insert(10, 10);
+    map.insert(20, 20);
+    map.insert(30, 30);
+    map.insert(40, 40);
+    map.insert(50, 50);
+
+    map = map
+        .into_iter()
+        .filter(|(key, _)| *key < 20 || *key >= 40)
+        .collect();
+
+    println!("{:?}", map);
+}
+
+```
+
 
 ### How does it work?
 ```rust

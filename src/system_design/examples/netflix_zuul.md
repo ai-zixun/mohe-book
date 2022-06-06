@@ -37,7 +37,7 @@ Define Push:
 * **S**omething
 * **H**appens
 
-
+The server push the data to the client instead of the client requests the data from the server.
 
 ### Zuul push servers
 

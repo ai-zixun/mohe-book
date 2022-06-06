@@ -1,0 +1,364 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Four Distributed System Architectural Patterns - 靺鞨笔记</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../leetcode/leetcode.html"><strong aria-hidden="true">1.</strong> LeetCode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../leetcode/linkedlist.html"><strong aria-hidden="true">1.1.</strong> LinkedList</a></li><li class="chapter-item expanded "><a href="../../leetcode/binary_search.html"><strong aria-hidden="true">1.2.</strong> Binary Search</a></li><li class="chapter-item expanded "><a href="../../leetcode/dijkstra.html"><strong aria-hidden="true">1.3.</strong> Dijkstra</a></li><li class="chapter-item expanded "><a href="../../leetcode/math.html"><strong aria-hidden="true">1.4.</strong> Math</a></li><li class="chapter-item expanded "><a href="../../leetcode/segment_tree.html"><strong aria-hidden="true">1.5.</strong> Segment Tree</a></li><li class="chapter-item expanded "><a href="../../leetcode/prefix_sum.html"><strong aria-hidden="true">1.6.</strong> Prefix Sum</a></li><li class="chapter-item expanded "><a href="../../leetcode/delta_diff_array.html"><strong aria-hidden="true">1.7.</strong> Delta / Difference Array</a></li><li class="chapter-item expanded "><a href="../../leetcode/rust_btreemap.html"><strong aria-hidden="true">1.8.</strong> Rust - BTreeMap</a></li></ol></li><li class="chapter-item expanded "><a href="../../system_design/system_design.html"><strong aria-hidden="true">2.</strong> System Design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../system_design/fundamental.html"><strong aria-hidden="true">2.1.</strong> Fundamental</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../system_design/fundamentals/four_distributed_system_architectural_patterns.html" class="active"><strong aria-hidden="true">2.1.1.</strong> Four Distributed System Architectural Patterns</a></li><li class="chapter-item expanded "><a href="../../system_design/fundamentals/api_design.html"><strong aria-hidden="true">2.1.2.</strong> API Design: GraphQL vs. gRPC vs. REST</a></li><li class="chapter-item expanded "><a href="../../system_design/fundamentals/websocket_vs_http2.html"><strong aria-hidden="true">2.1.3.</strong> Websocket vs. HTTP/2</a></li></ol></li><li class="chapter-item expanded "><a href="../../system_design/examples.html"><strong aria-hidden="true">2.2.</strong> Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../system_design/examples/netflix_zuul.html"><strong aria-hidden="true">2.2.1.</strong> Netflix Zuul</a></li></ol></li><li class="chapter-item expanded "><a href="../../system_design/questions.html"><strong aria-hidden="true">2.3.</strong> Questions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../system_design/questions/design_key_value_store.html"><strong aria-hidden="true">2.3.1.</strong> Design Key Value Store</a></li><li class="chapter-item expanded "><a href="../../system_design/questions/design_rate_limiter.html"><strong aria-hidden="true">2.3.2.</strong> Design Rate Limiter</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../blog/blog.html"><strong aria-hidden="true">3.</strong> Blog</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../blog/random-thoughts-on-tech/000-2022-New-Years-Resolution.html"><strong aria-hidden="true">3.1.</strong> 2022 New Year Resolution</a></li><li class="chapter-item expanded "><a href="../../blog/random-thoughts-on-tech/001-互联网时代的终结.html"><strong aria-hidden="true">3.2.</strong> 互联网时代的终结 </a></li><li class="chapter-item expanded "><a href="../../blog/random-thoughts-on-tech/002-把复杂留给自己，把简单留给客户.html"><strong aria-hidden="true">3.3.</strong> 002</a></li><li class="chapter-item expanded "><a href="../../blog/random-thoughts-on-tech/003-Serverless 新的云服务边疆.html"><strong aria-hidden="true">3.4.</strong> 003</a></li></ol></li><li class="chapter-item expanded "><a href="../../career/career.html"><strong aria-hidden="true">4.</strong> Career</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">靺鞨笔记</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="four-distributed-systems-architectural-patterns---by-tim-berglund"><a class="header" href="#four-distributed-systems-architectural-patterns---by-tim-berglund">Four Distributed Systems Architectural Patterns - by Tim Berglund</a></h1>
+<p>https://www.youtube.com/watch?v=BO761Fj6HH8</p>
+<table><thead><tr><th>Overall Rating</th><th>Modern Three Tier</th><th>Sharded</th><th>Batch + Stream</th><th>Event Bus</th></tr></thead><tbody>
+<tr><td>Scalability</td><td>4/5</td><td>3/5</td><td>5/5</td><td>5/5</td></tr>
+<tr><td>Coolness</td><td>2/5</td><td>1/5</td><td>1/5</td><td>5/5</td></tr>
+<tr><td>Difficult</td><td>3/5</td><td>4/5</td><td>5/5</td><td>4/5</td></tr>
+<tr><td>Flexibility</td><td>5/5</td><td>3/5</td><td>2/5</td><td>5/5</td></tr>
+</tbody></table>
+<h2 id="pattern-1---modern-three-tier"><a class="header" href="#pattern-1---modern-three-tier">Pattern 1 - Modern Three-Tier</a></h2>
+<pre><code> -----------------    -------------    ---------
+|Presentation Tier|--|Business Tier|--|Data Tier|
+ -----------------    -------------    ---------
+</code></pre>
+<pre><code> ----------           ---------    -----------
+| React JS |-- ELB --| Node JS |--| Cassandra |
+ ----------           ---------    -----------
+</code></pre>
+<ol>
+<li>Presentation Tier - React JS
+<ul>
+<li>stateless - on client</li>
+</ul>
+</li>
+<li>Business Tier - Node JS
+<ul>
+<li>stateless - on server</li>
+</ul>
+</li>
+<li>Data Tier - Cassandra</li>
+</ol>
+<p>Cassandra</p>
+<ul>
+<li>all nodes on the Cassandra cluster is the same</li>
+<li>assign each node a token (hash range) - for sharding</li>
+<li>hash the input - write/read the message from the server which contain the hash range</li>
+<li>write replicas to the next X nodes</li>
+</ul>
+<p><strong>strengths</strong> of the modern three tier</p>
+<ul>
+<li>reach front-end frameworks</li>
+<li>scalable middle tier - stateless</li>
+<li>infinitely scalable data tire - with cassandra</li>
+</ul>
+<p><strong>weaknesses</strong> of the modern three tier</p>
+<ul>
+<li>need to keep the middle tier stateless for scalability</li>
+</ul>
+<h2 id="pattern---shard"><a class="header" href="#pattern---shard">Pattern - Shard</a></h2>
+<p>Break up the system into several shard, where each shard is a complete system</p>
+<p>Good real-world examples:</p>
+<ul>
+<li>Slack</li>
+</ul>
+<p><strong>Stage 1</strong></p>
+<pre><code> --------      ----------------------      ----------
+| Client | -- | Complete Application | -- | Database |
+ --------      ----------------------      ----------
+</code></pre>
+<p><strong>Stage 2</strong></p>
+<pre><code> --------      --------      ----------------------      ----------
+| Client | -- |        | -- | Complete Application | -- | Database |
+ --------     |        |     ----------------------      ----------
+ --------     |        |     ----------------------      ----------
+| Client | -- | Router | -- | Complete Application | -- | Database |
+ --------     |        |     ----------------------      ----------
+ --------     |        |     ----------------------      ----------
+| Client | -- |        | -- | Complete Application | -- | Database |
+ --------      --------      ----------------------      ----------
+</code></pre>
+<p><strong>strengths</strong> of shard</p>
+<ul>
+<li>client isolation is easy (data and deployment)</li>
+<li>known, simple technologies</li>
+</ul>
+<p><strong>weaknesses</strong> of shard</p>
+<ul>
+<li>complexity: monitoring, routing</li>
+<li>no comprehensive view of data (need to merge all data)</li>
+<li>oversized shards -&gt; a shard become a distributed system on itself</li>
+<li>difficult to re-shard; need to design the sharding schema upfront</li>
+</ul>
+<h2 id="pattern-3---batch--stream"><a class="header" href="#pattern-3---batch--stream">Pattern 3 - Batch + Stream</a></h2>
+<p>Streaming vs Batch ?</p>
+<ul>
+<li>streaming - data is coming in in real time</li>
+<li>batch - data that is store somewhere</li>
+</ul>
+<p>Batch + Stream - assumes unbounded, immutable data</p>
+<pre><code> --------      ----------------------      ----------
+| Source | -- | batch processing     | -- | Scalable |
+| of     |     ----------------------     | Database |
+| Event  |     ----------------------     |          |
+|        | -- | streaming processing | -- |          |
+ --------      ----------------------      ----------
+</code></pre>
+<p>batch processing</p>
+<ul>
+<li>long-term storage</li>
+<li>bounded analysis</li>
+<li>high latency</li>
+</ul>
+<p>streaming processing</p>
+<ul>
+<li>temporary queueing</li>
+<li>unbounded computation</li>
+<li>low latency</li>
+</ul>
+<pre><code> --------      ----------------------      -----------
+| Kafka  | -- | Cassandra + Spark    | -- | Cassandra |
+|        |     ----------------------     |           |
+|        |     ----------------------     |           |
+|        | -- | Event frameworks     | -- |           |
+ --------      ----------------------      -----------
+</code></pre>
+<p>Kafka</p>
+<ul>
+<li>producer</li>
+<li>consumer</li>
+<li>topic
+<ul>
+<li>named queue</li>
+<li>can be partitioned</li>
+</ul>
+</li>
+</ul>
+<p>topic partitioning</p>
+<ul>
+<li>the queue become unordered</li>
+<li>because partition does not track order in other partition</li>
+</ul>
+<p><strong>strengths</strong> of batch + stream</p>
+<ul>
+<li>optimized subsystems based on operational requirements</li>
+<li>good at unbounded data</li>
+</ul>
+<p><strong>weaknesses</strong> of batch + stream</p>
+<ul>
+<li>complex to operate and maintain</li>
+</ul>
+<h2 id="pattern-4---event-bus"><a class="header" href="#pattern-4---event-bus">Pattern 4 - Event Bus</a></h2>
+<ul>
+<li>integration is a first-class concern</li>
+<li>life is dynamic; database are static</li>
+<li>table are streams and streams are tables</li>
+<li>keep your services close, your computer closer</li>
+</ul>
+<p>Storing Data in Message Queue</p>
+<ul>
+<li>Retention policy (e.g. can be forever)</li>
+<li>high I/O performance</li>
+<li>O(1) writes, O(1)reads</li>
+<li>partitioning, replication</li>
+<li>elastic scale</li>
+</ul>
+<p>first-class event - event or request ?</p>
+<ul>
+<li>request
+<ul>
+<li>request</li>
+<li>response</li>
+</ul>
+</li>
+<li>event
+<ul>
+<li>produce</li>
+<li>consume</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../system_design/fundamental.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../system_design/fundamentals/api_design.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../system_design/fundamental.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../system_design/fundamentals/api_design.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
