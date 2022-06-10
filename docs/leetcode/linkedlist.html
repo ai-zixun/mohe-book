@@ -154,7 +154,7 @@ pub struct ListNode {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>As LeetCode is using <code>Box</code> as the pointer to point to the next node. It does not allow multiple reference to the same node and does not allow interior mutability. Hence, to make our life easier, we would like to change the <code>ListNode</code> definition to:</p>
+<p>As LeetCode is using <code>Box</code> as the pointer to point to the next node. It does not allow multiple reference to the same node. Hence, to make our life easier, we would like to change the <code>ListNode</code> definition to:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
