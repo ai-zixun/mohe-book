@@ -10,7 +10,7 @@ pub struct ListNode {
 }
 ```
 
-As LeetCode is using `Box` as the pointer to point to the next node. It does not allow multiple reference to the same node and does not allow interior mutability. Hence, to make our life easier, we would like to change the `ListNode` definition to:
+As LeetCode is using `Box` as the pointer to point to the next node. It does not allow multiple reference to the same node. Hence, to make our life easier, we would like to change the `ListNode` definition to:
 
 ```rust
 #[derive(PartialEq, Eq, Clone, Debug)]
