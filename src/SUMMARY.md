@@ -9,6 +9,7 @@
   - [Prefix Sum](./leetcode/prefix_sum.md)
   - [Delta / Difference Array](./leetcode/delta_diff_array.md)
   - [Rust - BTreeMap](./leetcode/rust_btreemap.md)
+  - [Trie](./leetcode/trie.md)
 - [System Design](./system_design/system_design.md)
   - [Fundamental](./system_design/fundamental.md)
     - [Four Distributed System Architectural Patterns](./system_design/fundamentals/four_distributed_system_architectural_patterns.md)
