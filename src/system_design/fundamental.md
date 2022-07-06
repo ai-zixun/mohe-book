@@ -25,24 +25,6 @@ What makes distributed computing different from local computing
 
 The Byzantine General Problem
 
-CAP Theorem
-* Characteristics
-  * Consistency
-    * All nodes on the network must return the same data
-    * HARD!!!!!!
-    * Requires: Instant and universal replication
-    * Eventual Consistency does not count: It's not the C in CAP
-    * Consistency is not a binary state, there are many degrees of consistency
-  * Availability
-  * Partition Tolerance
-    * Network partition occur when network connectivity between two nodes is interrupted
-* Theorem
-  * NOT TRUE
-    * A distributed systen can deliver only two of the three characteristics
-  * TRUE
-    * Partition Tolerance is required; to avoid partition tolerance, there can only be one service, which is not a distributed system
-    * Hence, all distributed system need to balance between consistency and availability
-
 Latency -> How to set a
 
 Fischer Lynch Paterson Correctness result

@@ -23,12 +23,16 @@
 # System Design
 
 - [Interview Strategy](./system_design/system_design.md)
+
 - [Fundamental](./system_design/fundamental.md)
+  - [Consistency](./system_design/fundamentals/consistency.md)
   - [Four Distributed System Architectural Patterns](./system_design/fundamentals/four_distributed_system_architectural_patterns.md)
   - [API Design: GraphQL vs. gRPC vs. REST](./system_design/fundamentals/api_design.md)
   - [Websocket vs. HTTP/2](./system_design/fundamentals/websocket_vs_http2.md)
+
 - [Examples](./system_design/examples.md)
   - [Netflix Zuul](./system_design/examples/netflix_zuul.md)
+
 - [Questions](./system_design/questions.md)
   - [Design Key Value Store](./system_design/questions/design_key_value_store.md)
   - [Design Rate Limiter](./system_design/questions/design_rate_limiter.md)
