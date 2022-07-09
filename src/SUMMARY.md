@@ -25,6 +25,7 @@
 - [Interview Strategy](./system_design/system_design.md)
 
 - [Fundamental](./system_design/fundamental.md)
+  - [Algorithms](.system_design/../system_design/fundamentals/algorithms.md)
   - [Consistency](./system_design/fundamentals/consistency.md)
   - [Four Distributed System Architectural Patterns](./system_design/fundamentals/four_distributed_system_architectural_patterns.md)
   - [API Design: GraphQL vs. gRPC vs. REST](./system_design/fundamentals/api_design.md)
