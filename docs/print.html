@@ -143,11 +143,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <div style="break-before: page; page-break-before: always;"></div><h1 id="algorithms"><a class="header" href="#algorithms">algorithms</a></h1>
+                        <h1 id="algorithms"><a class="header" href="#algorithms">algorithms</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="binary-search"><a class="header" href="#binary-search">Binary Search</a></h1>
 <h2 id="template"><a class="header" href="#template">Template</a></h2>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn check(mid: i32) -&gt; bool {
     todo!()
@@ -274,8 +273,7 @@ fn binary_search() -&gt; i32 {
                         target
 </code></pre>
 <p>The first approach is to use the rust built-in binary search method of a <code>Vec</code></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let list = vec![0, 0, 1, 1, 1, 1, 2, 3, 3 ,3];
 let target = 2;
@@ -284,8 +282,7 @@ println!(&quot;Result: {:?}&quot;, res); // Ok(6)
 <span class="boring">}
 </span></code></pre></pre>
 <p>Another benefit is the built in binary search method will also yield the location where the given value should be inserted to keep the <code>Vec</code> in the sorted order.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let list = vec![0, 0, 1, 1, 1, 1, 3, 3, 3 ,3];
 let target = 2;
@@ -355,8 +352,7 @@ Number of booking at each timestamp
 <p><strong>Example</strong></p>
 <p>In the graph above we have the following 4 time slot <code>[0, 6], [2, 5], [1, 3], [4, 7]</code>, let's say that we want to find out at each timestamp how many booking are there on the schedule. How can we figure it out?</p>
 <p><strong>Using a BTreeMap</strong></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">use std::collections::BTreeMap;
 </span><span class="boring">
@@ -372,8 +368,7 @@ println!(&quot;delta - diff array: {:?}&quot;, delta);
 <span class="boring">}
 </span></code></pre></pre>
 <p><strong>Using a Vec</strong></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">use std::collections::BTreeMap;
 </span><span class="boring">
@@ -659,8 +654,7 @@ fn greatest_common_divisor(a: i32, b: i32) -&gt; i32 {
 <p>If <code>a / b</code> and <code>x / y</code> represent the same slope, then <code>a / gcd(a, b) == x / gcd(x, y)</code> and <code>b / gcd(a, b) == y / gcd(x, y)</code> must be true.</p>
 </li>
 </ol>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">fn gcd(a: i128, b: i128) -&gt; i128 {
 </span><span class="boring">    if b != 0 { gcd(b, a % b) } else { a }
@@ -727,8 +721,7 @@ prefix-sum (exclusive)
 </ul>
 <p>For the sake of simplicity and to avoid accessing numbers with native index, I always use the <strong>exclusive prefix sum</strong></p>
 <p>How to build the prefix sum array:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let numbers = vec![4, 6, 10, 40, 5, 8, 30];
 let mut prefix_sum = vec![0; numbers.len() + 1];
@@ -742,8 +735,7 @@ println!{&quot;prefix_sum: {:?}&quot;, prefix_sum};
 <span class="boring">}
 </span></code></pre></pre>
 <p>How to access the sum of all element with index <code>[i, j)</code>:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">let prefix_sum = vec![0, 4, 10, 20, 60, 65, 73, 103];
 </span>let (i, j) = (2, 5);
@@ -1035,8 +1027,7 @@ impl SegmentTreeNode{
 
 </code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="trie"><a class="header" href="#trie">Trie</a></h1>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug)]
 struct Trie {
@@ -1090,22 +1081,19 @@ impl Trie {
 </ul>
 <h2 id="floor-and-ceil"><a class="header" href="#floor-and-ceil">Floor and Ceil</a></h2>
 <h3 id="floor-the-entry-with-the-greatest-key-that-is-less-or-equal-to-a-given-key"><a class="header" href="#floor-the-entry-with-the-greatest-key-that-is-less-or-equal-to-a-given-key">Floor: The Entry with the Greatest Key that is Less or Equal to a Given Key</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>map.range(..=key).next_back().unwrap();
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="ceil-the-entry-with-the-least-key-that-is-greater-or-equal-to-a-given-key"><a class="header" href="#ceil-the-entry-with-the-least-key-that-is-greater-or-equal-to-a-given-key">Ceil: The Entry with the Least key that is Greater or Equal to a Given Key</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>map.range(key..).next().unwrap();
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="first"><a class="header" href="#first">First</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let set = BTreeSet::from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 // unstable approach: need `#![feature(map_first_last)]` feature flag
@@ -1115,8 +1103,7 @@ println!(&quot;{:?}&quot;, set.range(..).next());
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="last"><a class="header" href="#last">Last</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let set = BTreeSet::from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 // unstable approach: need `#![feature(map_first_last)]` feature flag
@@ -1148,8 +1135,7 @@ fn main() {
 
 </code></pre></pre>
 <h3 id="how-does-it-work"><a class="header" href="#how-does-it-work">How does it work?</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub fn range&lt;T, R&gt;(&amp;self, range: R) -&gt; Range&lt;'_, K, V&gt;
 <span class="boring">}
@@ -1183,8 +1169,7 @@ println!(&quot;{:?}&quot;, res);
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="linkedlist"><a class="header" href="#linkedlist">LinkedList</a></h1>
 <p>Let's first take a look at how LeetCode define the LinkedList in rust</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
@@ -1194,8 +1179,7 @@ pub struct ListNode {
 <span class="boring">}
 </span></code></pre></pre>
 <p>As LeetCode is using <code>Box</code> as the pointer to point to the next node. It does not allow multiple reference to the same node. Hence, to make our life easier, we would like to change the <code>ListNode</code> definition to:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(PartialEq, Eq, Clone, Debug)]
 pub struct MutListNode {
@@ -1210,8 +1194,7 @@ pub struct MutListNode {
 </ul>
 <p>To convert between the LeetCode official <code>ListNode</code> and the mutable multi-referencing <code>MutListNode</code> we would need the following conversion utility functions</p>
 <p>From <code>Option&lt;Box&lt;ListNode&gt;&gt;</code> to <code>Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;</code></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn to_mut_list_node(node: Option&lt;Box&lt;ListNode&gt;&gt;) -&gt; Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt; {
     match node {
@@ -1225,8 +1208,7 @@ pub struct MutListNode {
 <span class="boring">}
 </span></code></pre></pre>
 <p>From <code>Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;</code> to <code>Option&lt;Box&lt;ListNode&gt;&gt;</code></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn to_list_node(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
     match node {
@@ -1240,8 +1222,7 @@ pub struct MutListNode {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="source-code"><a class="header" href="#source-code">Source Code</a></h2>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
@@ -1545,10 +1526,11 @@ fn mut_linked_list_to_vec(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&g
 </ul>
 <h3 id="question-to-ask"><a class="header" href="#question-to-ask">Question to ask:</a></h3>
 <h4 id="data-schema"><a class="header" href="#data-schema">Data schema</a></h4>
-<table><thead><tr><th></th><th>Individual Data</th><th>Aggregated Data</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th></th><th>Individual Data</th><th>Aggregated Data</th></tr></thead><tbody>
 <tr><td>Pro</td><td><ul><li>Fast to write</li><li>The data is flexible for future processing</li></ul></td><td><ul><li>Fast to read</li><li>The data is ready to be used</li></ul></td></tr>
 <tr><td>Con</td><td><ul><li>Slow to read</li><li>Costly to store</li></ul></td><td><ul><li>Usage is limited by the aggregation method</li><li>Requires data aggregation</li><li>Hard to fix pervious aggregation errors</li></ul></td></tr>
 </tbody></table>
+</div>
 <p>Ask: what is the expected data day?</p>
 <ul>
 <li>Few milliseconds/seconds -&gt; store the individual data (stream processing)</li>
@@ -1782,12 +1764,13 @@ fn mut_linked_list_to_vec(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&g
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="four-distributed-systems-architectural-patterns---by-tim-berglund"><a class="header" href="#four-distributed-systems-architectural-patterns---by-tim-berglund">Four Distributed Systems Architectural Patterns - by Tim Berglund</a></h1>
 <p>https://www.youtube.com/watch?v=BO761Fj6HH8</p>
-<table><thead><tr><th>Overall Rating</th><th>Modern Three Tier</th><th>Sharded</th><th>Batch + Stream</th><th>Event Bus</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th>Overall Rating</th><th>Modern Three Tier</th><th>Sharded</th><th>Batch + Stream</th><th>Event Bus</th></tr></thead><tbody>
 <tr><td>Scalability</td><td>4/5</td><td>3/5</td><td>5/5</td><td>5/5</td></tr>
 <tr><td>Coolness</td><td>2/5</td><td>1/5</td><td>1/5</td><td>5/5</td></tr>
 <tr><td>Difficult</td><td>3/5</td><td>4/5</td><td>5/5</td><td>4/5</td></tr>
 <tr><td>Flexibility</td><td>5/5</td><td>3/5</td><td>2/5</td><td>5/5</td></tr>
 </tbody></table>
+</div>
 <h2 id="pattern-1---modern-three-tier"><a class="header" href="#pattern-1---modern-three-tier">Pattern 1 - Modern Three-Tier</a></h2>
 <pre><code> -----------------    -------------    ---------
 |Presentation Tier|--|Business Tier|--|Data Tier|
@@ -2108,11 +2091,12 @@ GET http://example.com/conversions/2/title
 <li>Versioning</li>
 <li>Still early</li>
 </ul>
-<table><thead><tr><th></th><th>Coupling</th><th>Chattiness</th><th>Client Complexity</th><th>Cognitive Complexity</th><th>Caching</th><th>Discoverability</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th></th><th>Coupling</th><th>Chattiness</th><th>Client Complexity</th><th>Cognitive Complexity</th><th>Caching</th><th>Discoverability</th></tr></thead><tbody>
 <tr><td><strong>RPC - Functions</strong></td><td>High</td><td>Medium</td><td>Low</td><td>Low</td><td>Custom</td><td>Bad</td></tr>
 <tr><td><strong>REST - Resources</strong></td><td>Low</td><td>High</td><td>Low</td><td>Low</td><td>HTTP</td><td>GOOD</td></tr>
 <tr><td><strong>GraphQL - Queries</strong></td><td>Medium</td><td>Low</td><td>High</td><td>High</td><td>Custom</td><td>Good</td></tr>
 </tbody></table>
+</div>
 <h2 id="use-case-management-api"><a class="header" href="#use-case-management-api">Use Case: Management API</a></h2>
 <p>Solution: REST
 Consideration:</p>
@@ -2171,7 +2155,7 @@ Considerations:</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="websocket-vs-http2"><a class="header" href="#websocket-vs-http2">Websocket vs. HTTP/2</a></h1>
 <p>https://www.infoq.com/articles/websocket-and-http2-coexist/</p>
-<table><thead><tr><th></th><th>HTTP/2</th><th>WebSocket</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th></th><th>HTTP/2</th><th>WebSocket</th></tr></thead><tbody>
 <tr><td>Header</td><td>Compressed (HPACK)</td><td>None</td></tr>
 <tr><td>Binary</td><td>YES</td><td>Binary or Textual</td></tr>
 <tr><td>Multiplexing</td><td>YES</td><td>YES</td></tr>
@@ -2180,6 +2164,7 @@ Considerations:</p>
 <tr><td>Direction</td><td>Client/Server + Server Push</td><td>Bidirectional</td></tr>
 <tr><td>Full-Duplex</td><td>YES</td><td>YES</td></tr>
 </tbody></table>
+</div>
 <h2 id="is-http2-a-replacement-for-push-technologies-such-as-websocket-or-sse-no"><a class="header" href="#is-http2-a-replacement-for-push-technologies-such-as-websocket-or-sse-no">is HTTP/2 a replacement for push technologies such as WebSocket or SSE? NO</a></h2>
 <p>Server Push vs Websocket Bidirectional communication</p>
 <ul>

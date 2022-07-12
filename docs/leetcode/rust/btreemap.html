@@ -150,22 +150,19 @@
 </ul>
 <h2 id="floor-and-ceil"><a class="header" href="#floor-and-ceil">Floor and Ceil</a></h2>
 <h3 id="floor-the-entry-with-the-greatest-key-that-is-less-or-equal-to-a-given-key"><a class="header" href="#floor-the-entry-with-the-greatest-key-that-is-less-or-equal-to-a-given-key">Floor: The Entry with the Greatest Key that is Less or Equal to a Given Key</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>map.range(..=key).next_back().unwrap();
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="ceil-the-entry-with-the-least-key-that-is-greater-or-equal-to-a-given-key"><a class="header" href="#ceil-the-entry-with-the-least-key-that-is-greater-or-equal-to-a-given-key">Ceil: The Entry with the Least key that is Greater or Equal to a Given Key</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>map.range(key..).next().unwrap();
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="first"><a class="header" href="#first">First</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let set = BTreeSet::from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 // unstable approach: need `#![feature(map_first_last)]` feature flag
@@ -175,8 +172,7 @@ println!(&quot;{:?}&quot;, set.range(..).next());
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="last"><a class="header" href="#last">Last</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let set = BTreeSet::from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 // unstable approach: need `#![feature(map_first_last)]` feature flag
@@ -208,8 +204,7 @@ fn main() {
 
 </code></pre></pre>
 <h3 id="how-does-it-work"><a class="header" href="#how-does-it-work">How does it work?</a></h3>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub fn range&lt;T, R&gt;(&amp;self, range: R) -&gt; Range&lt;'_, K, V&gt;
 <span class="boring">}

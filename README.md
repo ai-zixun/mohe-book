@@ -11,5 +11,5 @@ https://ai-zixun.github.io/mohe-book/
 ## 构建静态网页
 
 ```shell
-./utils/build_book.sh
+mdbook build
 ```
