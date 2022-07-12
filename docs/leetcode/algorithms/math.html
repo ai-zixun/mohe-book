@@ -191,8 +191,7 @@ fn greatest_common_divisor(a: i32, b: i32) -&gt; i32 {
 <p>If <code>a / b</code> and <code>x / y</code> represent the same slope, then <code>a / gcd(a, b) == x / gcd(x, y)</code> and <code>b / gcd(a, b) == y / gcd(x, y)</code> must be true.</p>
 </li>
 </ol>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">fn gcd(a: i128, b: i128) -&gt; i128 {
 </span><span class="boring">    if b != 0 { gcd(b, a % b) } else { a }

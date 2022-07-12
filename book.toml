@@ -4,3 +4,7 @@ language = "en"
 multilingual = false
 src = "src"
 title = "靺鞨笔记"
+
+[build]
+build-dir = "docs"
+create-missing = false

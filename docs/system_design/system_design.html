@@ -349,10 +349,11 @@
 </ul>
 <h3 id="question-to-ask"><a class="header" href="#question-to-ask">Question to ask:</a></h3>
 <h4 id="data-schema"><a class="header" href="#data-schema">Data schema</a></h4>
-<table><thead><tr><th></th><th>Individual Data</th><th>Aggregated Data</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th></th><th>Individual Data</th><th>Aggregated Data</th></tr></thead><tbody>
 <tr><td>Pro</td><td><ul><li>Fast to write</li><li>The data is flexible for future processing</li></ul></td><td><ul><li>Fast to read</li><li>The data is ready to be used</li></ul></td></tr>
 <tr><td>Con</td><td><ul><li>Slow to read</li><li>Costly to store</li></ul></td><td><ul><li>Usage is limited by the aggregation method</li><li>Requires data aggregation</li><li>Hard to fix pervious aggregation errors</li></ul></td></tr>
 </tbody></table>
+</div>
 <p>Ask: what is the expected data day?</p>
 <ul>
 <li>Few milliseconds/seconds -&gt; store the individual data (stream processing)</li>

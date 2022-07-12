@@ -144,8 +144,7 @@
                     <main>
                         <h1 id="linkedlist"><a class="header" href="#linkedlist">LinkedList</a></h1>
 <p>Let's first take a look at how LeetCode define the LinkedList in rust</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
@@ -155,8 +154,7 @@ pub struct ListNode {
 <span class="boring">}
 </span></code></pre></pre>
 <p>As LeetCode is using <code>Box</code> as the pointer to point to the next node. It does not allow multiple reference to the same node. Hence, to make our life easier, we would like to change the <code>ListNode</code> definition to:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(PartialEq, Eq, Clone, Debug)]
 pub struct MutListNode {
@@ -171,8 +169,7 @@ pub struct MutListNode {
 </ul>
 <p>To convert between the LeetCode official <code>ListNode</code> and the mutable multi-referencing <code>MutListNode</code> we would need the following conversion utility functions</p>
 <p>From <code>Option&lt;Box&lt;ListNode&gt;&gt;</code> to <code>Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;</code></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn to_mut_list_node(node: Option&lt;Box&lt;ListNode&gt;&gt;) -&gt; Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt; {
     match node {
@@ -186,8 +183,7 @@ pub struct MutListNode {
 <span class="boring">}
 </span></code></pre></pre>
 <p>From <code>Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;</code> to <code>Option&lt;Box&lt;ListNode&gt;&gt;</code></p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn to_list_node(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&gt;) -&gt; Option&lt;Box&lt;ListNode&gt;&gt; {
     match node {
@@ -201,8 +197,7 @@ pub struct MutListNode {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="source-code"><a class="header" href="#source-code">Source Code</a></h2>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
