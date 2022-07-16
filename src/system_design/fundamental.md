@@ -40,3 +40,28 @@ To manage uncertainty we have mitigation strategies
 Mental modal calibration
 * Incident analysis - post mortem
   * fresh learning
+
+Request Validation
+* Check the request is hitting an valid API
+* Check the request consist all required parameters
+* Check the request parameters are within the valid range
+
+Authentication / Authorization
+* Authentication: validate the identity of the user/service
+* Authorization: check the user/service has the permission for the given action
+
+TLS / SSL Termination
+* Decrypting the TLS/SSL request and pass the un-encrypted request to the backend services
+
+Request Dispatching
+* Sending the request to the appropriate backend service
+
+Request De-duplication
+*
+
+Metrics Collection
+*
+
+Bulkhead Pattern
+
+Circuit Breaker Pattern
