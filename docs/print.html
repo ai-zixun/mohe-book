@@ -1666,6 +1666,7 @@ fn mut_linked_list_to_vec(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&g
 <div style="break-before: page; page-break-before: always;"></div><h1 id="algorithms-1"><a class="header" href="#algorithms-1">Algorithms</a></h1>
 <p><em>When dealing with system design questions such as designing a rate limiting system, a sharding system, or a global location service, candidate can use some of the following system design algorithms during the interview.</em></p>
 <h2 id="leaky-bucket-algorithms"><a class="header" href="#leaky-bucket-algorithms">Leaky Bucket Algorithms</a></h2>
+<p><strong>Use-case</strong>: Rate Limiting Systems</p>
 <p><strong>Process</strong></p>
 <ol>
 <li>a client send a message to the server</li>
@@ -1685,6 +1686,33 @@ fn mut_linked_list_to_vec(node: Option&lt;Rc&lt;RefCell&lt;MutListNode&gt;&gt;&g
 <li><code>drain_rate</code>: the speed that the message is been consumed from the bucket</li>
 </ul>
 <p><img src=".system_design/../system_design/fundamentals/./images/algorithms_000.png" alt="Leaky Bucket Algorithms" /></p>
+<h2 id="token-bucket-algorithms"><a class="header" href="#token-bucket-algorithms">Token Bucket Algorithms</a></h2>
+<p><strong>Use-case</strong>: Rate Limiting System</p>
+<p><strong>Process</strong></p>
+<ol>
+<li>a client send a message to the server</li>
+<li>the server uses an sharding algorithms to find the corresponding bucket for the message</li>
+<li>the server tries to acquire a token from the bucket
+<ul>
+<li>if a token is acquired, the request is processed</li>
+<li>if no token exist in the bucket, the request is dropped</li>
+</ul>
+</li>
+<li>the bucket receive a refill of <code>refill_size</code> amount of token each for each <code>refill_rate</code> interval</li>
+<li>the amount of token can be stored in the bucket is limited by the <code>bucket_size</code></li>
+</ol>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>bucket_size</code>: the maximum amount of token can be stored in each bucket</li>
+<li><code>refill_size</code>: the amount of token</li>
+<li><code>refill_rate</code>: the time interval between each refill</li>
+</ul>
+<p><strong>Alteration</strong></p>
+<ul>
+<li><em>token per request</em>: for each token, the system can process one message. if there are <code>n</code> message, then it would requires <code>n</code> token from the bucket for all the message to be processed.</li>
+<li><em>token per bytes</em>: for each token, the system can process <code>x</code> byte of message. if there are <code>n</code> message each with <code>s</code> size, then it would requires <code>CEIL(x / s) * n</code> tokens from the bucket for all message to be processed.</li>
+</ul>
+<p><img src=".system_design/../system_design/fundamentals/./images/algorithms_001.png" alt="Token Bucket Algorithms" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="consistency"><a class="header" href="#consistency">Consistency</a></h1>
 <h2 id="definitions"><a class="header" href="#definitions">Definitions</a></h2>
 <p><strong>Consensus</strong>: The methods to get all of the instances/nodes in the system to agree on something.</p>
@@ -2408,7 +2436,7 @@ Socket --&gt; Write --&gt; Read --&gt; Thread 2</p>
 <li>sliding window log</li>
 <li>sliding window counter</li>
 </ul>
-<h3 id="token-bucket-algorithms"><a class="header" href="#token-bucket-algorithms">Token Bucket Algorithms</a></h3>
+<h3 id="token-bucket-algorithms-1"><a class="header" href="#token-bucket-algorithms-1">Token Bucket Algorithms</a></h3>
 <p>algorithms</p>
 <ul>
 <li>each user is assigned a pre-defined token bucket</li>
