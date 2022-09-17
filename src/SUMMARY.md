@@ -38,6 +38,8 @@
 - [Questions](./system_design/questions.md)
   - [Design Key Value Store](./system_design/questions/design_key_value_store.md)
   - [Design Rate Limiter](./system_design/questions/design_rate_limiter.md)
+  - [Design Distributed Cache](./system_design/questions/design_distributed_cache.md)
+  - [Design Payment Network](./system_design/questions/design_payment_network.md)
 
 # Career
 
