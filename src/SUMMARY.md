@@ -34,6 +34,7 @@
 
 - [Examples](./system_design/examples.md)
   - [Netflix Zuul](./system_design/examples/netflix_zuul.md)
+  - [AWS Fargate](./system_design/examples/aws_fargate.md)
 
 - [Questions](./system_design/questions.md)
   - [Design Key Value Store](./system_design/questions/design_key_value_store.md)
