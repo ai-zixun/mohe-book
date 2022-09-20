@@ -16,9 +16,7 @@
 - [Rust](./leetcode/rust.md)
   - [BTreeMap](./leetcode/rust/btreemap.md)
   - [LinkedList](./leetcode/rust/linkedlist.md)
-
-
-
+  - [Two Dimensional Matrix](./leetcode/rust/2d_matrix.md)
 
 # System Design
 
