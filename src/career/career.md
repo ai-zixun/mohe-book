@@ -52,4 +52,15 @@
     * in code reviews, proactively identify areas where you have concerns or questions
 * Helping others
     * Create a friendly environment: encourage questions
-*
+
+# Routines and Skills
+
+* Brag Document
+    * Record the event in detail every time when you have done something impactful
+* Balance between low and high impactful tasks
+    * Do not waste all of the time on low impact tasks
+    * Keep a good balance between low and high impact tasks
+* Interview Skills (as an Interviewer)
+    * Active listening
+    * Communication
+    * Calibrate the skill to rate other engineers
