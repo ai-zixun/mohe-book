@@ -204,66 +204,6 @@
 <li>sliding window log</li>
 <li>sliding window counter</li>
 </ul>
-<h3 id="token-bucket-algorithms"><a class="header" href="#token-bucket-algorithms">Token Bucket Algorithms</a></h3>
-<p>algorithms</p>
-<ul>
-<li>each user is assigned a pre-defined token bucket</li>
-<li>each token bucket has a pre-defined capacity</li>
-<li>each token bucket receive a fix-ed amount of token at a pre-defined interval
-<ul>
-<li>if the amount of token exceed the capacity, it would overflow, so the amount of token in the bucket does not exceed the capacity limitation</li>
-</ul>
-</li>
-<li>when receiving a request, the rate limiter will try to retrieve a token from the bucket
-<ul>
-<li>if a token exist: proceed to process the request</li>
-<li>if the bucket is empty: refuse the request</li>
-</ul>
-</li>
-</ul>
-<p>key parameters</p>
-<ul>
-<li>bucket capacity</li>
-<li>refill amount</li>
-<li>refill interval</li>
-</ul>
-<p>pro</p>
-<ul>
-<li>simple algorithm</li>
-<li>allow burst request within the bucket capacity
-cos</li>
-<li>limited tunability due to limited configurable parameters</li>
-</ul>
-<h3 id="leaking-bucket-algorithms"><a class="header" href="#leaking-bucket-algorithms">leaking bucket algorithms</a></h3>
-<p>algorithms</p>
-<ul>
-<li>each user is assigned a pre-defined FIFO queue with pre-defined size</li>
-<li>request are pulled and processed at a fixed rate</li>
-<li>when a request comes in, it would try to insert it into the queue
-<ul>
-<li>if the queue is full, the request will be rejected</li>
-<li>if the queue has room, the request will be stored in the queue to be processed</li>
-</ul>
-</li>
-</ul>
-<p>key parameters</p>
-<ul>
-<li>queue size</li>
-<li>rate of processing</li>
-</ul>
-<p>pro</p>
-<ul>
-<li>stable process flow due to the fixed rate
-con</li>
-<li>the queue might rate limit after the burst instead of at the burst</li>
-<li>limited tunability due to limited configurable parameters</li>
-</ul>
-<h3 id="fixed-window-counter-algorithm"><a class="header" href="#fixed-window-counter-algorithm">fixed window counter algorithm</a></h3>
-<p>TODO</p>
-<h3 id="sliding-window-log-algorithm"><a class="header" href="#sliding-window-log-algorithm">sliding window log algorithm</a></h3>
-<p>TODO</p>
-<h3 id="sliding-window-counter-algorithm"><a class="header" href="#sliding-window-counter-algorithm">sliding window counter algorithm</a></h3>
-<p>TODO</p>
 <h2 id="high-level-design"><a class="header" href="#high-level-design">High level design</a></h2>
 <p>Where to store the counter/queue/log?</p>
 <ul>
@@ -297,6 +237,7 @@ con</li>
 <ul>
 <li>Alex Xu - <em>System Design Interview - An Insider's Guide</em></li>
 </ul>
+<p><img src="./images/Design-Rate-Limiter.png" alt="Distributed Cache" /></p>
 
                     </main>
 
