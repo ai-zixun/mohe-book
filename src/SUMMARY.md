@@ -39,6 +39,7 @@
   - [Design Rate Limiter](./system_design/questions/design_rate_limiter.md)
   - [Design Distributed Cache](./system_design/questions/design_distributed_cache.md)
   - [Design Payment Network](./system_design/questions/design_payment_network.md)
+  - [Design WebSocket Server](./system_design/questions/design_websocket_server.md)
 
 # Career
 
