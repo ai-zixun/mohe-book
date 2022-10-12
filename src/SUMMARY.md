@@ -41,6 +41,8 @@
   - [Design Payment Network](./system_design/questions/design_payment_network.md)
   - [Design WebSocket Server](./system_design/questions/design_websocket_server.md)
 
+- [Terminologies](./system_design/terminologies/terminologies.md)
+
 # Career
 
 - [Career](./career/career.md)
