@@ -40,6 +40,7 @@
   - [Design Distributed Cache](./system_design/questions/design_distributed_cache.md)
   - [Design Payment Network](./system_design/questions/design_payment_network.md)
   - [Design WebSocket Server](./system_design/questions/design_websocket_server.md)
+  - [Design Prometheus](./system_design/questions/design_prometheus.md)
 
 - [Terminologies](./system_design/terminologies/terminologies.md)
 
