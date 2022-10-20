@@ -74,3 +74,41 @@ println!("Standard approach:      {}", equal);
 println!("Cross product approach: {}", equal_cross_product);
 println!("GDC approach:           {}", equal_gdc);
 ```
+
+## Prime List - A list of all prime numbers
+
+```rust
+fn prime_list(max_value: usize) -> Vec<usize> {
+    let mut is_prime = vec![true; max_value + 1];
+    is_prime[0] = false;
+    is_prime[1] = false;
+
+    for i in 2..=max_value {
+        if is_prime[i] {
+            let mut factor = 2;
+            while factor * i <= max_value {
+                is_prime[factor * i] = false;
+                factor += 1;
+            }
+        }
+    }
+
+    (0..=max_value).filter(|i| is_prime[*i]).collect()
+}
+
+```
+
+## Prime Set - Unique prime divisors of number n
+
+```rust
+fn prime_set(n: usize) -> HashSet<usize> {
+    for i in 2..((n as f64).sqrt() as usize + 1) {
+        if n % i == 0 {
+            let mut set = prime_set(n / i);
+            set.insert(i);
+            return set;
+        }
+    }
+    HashSet::from([n])
+}
+```
