@@ -8,6 +8,7 @@
   - [Dijkstra](./leetcode/algorithms/dijkstra.md)
   - [Math](./leetcode/algorithms/math.md)
   - [Prefix Sum](./leetcode/algorithms/prefix_sum.md)
+  - [Union Find](./leetcode/algorithms/union_find.md)
 
 - [Data Structure](./leetcode/data_structure.md)
   - [Segment Tree](./leetcode/data_structure/segment_tree.md)
