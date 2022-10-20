@@ -4,15 +4,15 @@
 
 ```rust
 # fn main() {
-#     println!("gcd of 10 and 5  is {}", greatest_common_divisor(10, 5));
-#     println!("gcd of 11 and 22 is {}", greatest_common_divisor(11, 22));
-#     println!("gcd of 44 and 63  is {}", greatest_common_divisor(44, 63));
-#     println!("gcd of 44 and 64  is {}", greatest_common_divisor(44, 64));
+#     println!("gcd of 10 and 5  is {}", gcd(10, 5));
+#     println!("gcd of 11 and 22 is {}", gcd(11, 22));
+#     println!("gcd of 44 and 63  is {}", gcd(44, 63));
+#     println!("gcd of 44 and 64  is {}", gcd(44, 64));
 # }
 
-fn greatest_common_divisor(a: i32, b: i32) -> i32 {
+fn gcd(a: i32, b: i32) -> i32 {
     if b != 0 {
-        greatest_common_divisor(b, a % b)
+        gcd(b, a % b)
     } else {
         a
     }
@@ -23,22 +23,22 @@ fn greatest_common_divisor(a: i32, b: i32) -> i32 {
 
 ```rust
 # fn main() {
-#     println!("lcm of 10 and 5  is {}", least_common_multiple(10, 5));
-#     println!("lcm of 11 and 22 is {}", least_common_multiple(11, 22));
-#     println!("lcm of 44 and 63  is {}", least_common_multiple(44, 63));
-#     println!("lcm of 44 and 64  is {}", least_common_multiple(44, 64));
+#     println!("lcm of 10 and 5  is {}", lcm(10, 5));
+#     println!("lcm of 11 and 22 is {}", lcm(11, 22));
+#     println!("lcm of 44 and 63  is {}", lcm(44, 63));
+#     println!("lcm of 44 and 64  is {}", lcm(44, 64));
 # }
 #
-# fn greatest_common_divisor(a: i32, b: i32) -> i32 {
+# fn gcd(a: i32, b: i32) -> i32 {
 #     if b != 0 {
-#         greatest_common_divisor(b, a % b)
+#         gcd(b, a % b)
 #     } else {
 #         a
 #     }
 # }
 #
-fn least_common_multiple(a: i32, b: i32) -> i32 {
-    a * b / greatest_common_divisor(a, b)
+fn lcm(a: i32, b: i32) -> i32 {
+    a * b / gcd(a, b)
 }
 ```
 
