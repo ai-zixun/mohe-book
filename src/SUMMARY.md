@@ -24,7 +24,7 @@
 - [Interview Strategy](./system_design/system_design.md)
 
 - [Fundamental](./system_design/fundamental.md)
-  - [Algorithms](.system_design/../system_design/fundamentals/algorithms.md)
+  - [Algorithms](./system_design/fundamentals/algorithms.md)
   - [Consistency](./system_design/fundamentals/consistency.md)
   - [Technologies](./system_design/fundamentals/technologies.md)
   - [Four Distributed System Architectural Patterns](./system_design/fundamentals/four_distributed_system_architectural_patterns.md)
