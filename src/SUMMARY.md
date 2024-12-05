@@ -48,6 +48,7 @@
 # Career
 
 - [Career](./career/career.md)
+- [Startup](./career/startup.md)
 
 # Other
 
