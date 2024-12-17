@@ -49,6 +49,7 @@
 
 - [Career](./career/career.md)
 - [Startup](./career/startup.md)
+- [Ideas](./career/ideas.md)
 
 # Book 
 
