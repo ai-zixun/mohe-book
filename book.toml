@@ -5,6 +5,9 @@ multilingual = true
 src = "src"
 title = "靺鞨笔记"
 
+[output.html]
+no-section-label = true
+
 [build]
 build-dir = "docs"
 create-missing = false

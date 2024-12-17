@@ -13,3 +13,11 @@ https://ai-zixun.github.io/mohe-book/
 ```shell
 mdbook build
 ```
+
+## Commit Tags 
+
+```
+[book] 读书笔记和引用
+[cicd] change to the deployment automation
+[note] 其他笔记
+```
