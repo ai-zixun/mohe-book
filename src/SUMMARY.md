@@ -59,6 +59,7 @@
   - [创业 36 条军规](./book/创业%2036%20条军规.md)
   - [基层女性](./book/基层女性.md)
   - [城與不確定的牆（街とその不確かな壁）](./book/城與不確定的牆.md)
+  - [Million Dollar Weekend](./book/Million_Dollar_Weekend.md)
 
 # Other
 
