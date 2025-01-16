@@ -15,3 +15,5 @@
 ## 2025-01-12: \[已有解决方案\] Gym App
 
 日常训练中「训记」已经取代 FitBot 
+
+## 2025-01-16: Todolist w/ GitHub Style Heatmap (auto sync to Notion)
