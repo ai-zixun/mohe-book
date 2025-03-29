@@ -64,6 +64,7 @@
   - [猫说：区块链投资笔记](./book/20250214_猫说区块链投资笔记.md)
   - [Feel-Good Productivity](./book/20250311_Feel_Good_Productivity.md)
   - [参与感：小米口碑营销内部手册](./book/20250316_参与感_小米口碑营销内部手册.md)
+  - [设计中的设计](./book/20250329_设计中的设计.md)
 
 
 # Other
